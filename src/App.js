@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import hc from './hc'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    data:''
+  }
+  updateData = e => {
+    this.setState({ data: e.target.value })
+  }
+  bounce = e => {
+    hc({
+      functionName: 'reee',
+      params: {
+        s: this.state.data
+      },
+      callback: data => {
+        console.log(JSON.stringify(data))
+      }
+    })
+  }
+  render(){
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h3>hc test</h3>
+          <p>
+            Write something: <input onKeyUp={this.updateData}/>
+          </p>
+          <button onClick={this.bounce}>Bounce data</button>
+        </header>
+      </div>
+    )
+  }
 }
 
 export default App;
